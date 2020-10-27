@@ -70,3 +70,58 @@ exports.update = (req, res) => {
         }
     )
 }
+
+/**
+ * Método para listar todos los libros  que estan en la plataforma.
+ * @param {*} req => Todo lo que se recibe
+ * @param {*} res => Respuesta que se devuelve
+ */
+exports.getAll = (req, res) =>{
+    BookModel.find()
+        .populate('genre')
+        .exec()
+        .then((books)=> res.send(books))
+        .catch(
+            (error) =>{
+                res.status(500).send({
+                    message: 'Error al obtener los libros'
+                })
+            }
+        )
+}
+
+/**
+ * Método para obtener un libro por el id
+ * @param {*} req => Todo lo que se recibe.
+ * @param {*} res => Respuesta que se devuelve
+ */
+exports.getOne = (req, res) =>{
+    BookModel.findById(req.params.id)
+    .populate('genre')
+    .exec()
+    .then((book)=>{res.send(book)})
+    .catch(
+        (error) => {
+            res.status(500).send({
+                message: error.message
+            })
+        }
+    )
+}
+
+/**
+ * Método para eliminar un libro por el id
+ * @param {*} req => Todo lo que se recibe
+ * @param {*} res => Respuesta que se devuelve
+ */
+exports.deleteOne = (req, res) => {
+    BookModel.findByIdAndRemove(req.params.id)
+    .then((book)=>{res.send(book)})
+    .catch(
+        (error) =>{
+            res.status(500).send({
+                message: error.message
+            })
+        }
+    )
+}
