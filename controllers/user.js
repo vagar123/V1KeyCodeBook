@@ -78,3 +78,43 @@ exports.update = (req, res) => {
     )
 
 }
+
+/**
+ * Método para listar todos los usuarios
+ */
+exports.getAll = (req, res) =>{
+    UserModel.find()
+    .then((users)=>{res.send(users)})
+    .catch(
+        (error) =>{
+            res.status(500).send({
+                message: error.message
+            })
+        }
+    )
+}
+
+exports.getOne = (req, res) =>{
+    UserModel.findById(req.params.id)
+
+    .then((users)=>{res.send(users)})
+    .catch(
+        (error)=>{
+            res.status(500).send({
+                message: error.message
+            })
+        }
+    )
+}
+
+exports.deleteOne = (req, res) =>{
+    UserModel.findByIdAndRemove(req.params.id)
+    .then((users)=>{res.send(users)})
+    .catch(
+        (error) =>{
+            res.status(500).send({
+                message: error.message
+            })
+        }
+    )
+}
