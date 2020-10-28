@@ -84,7 +84,7 @@ exports.getAll = (req, res) =>{
         .catch(
             (error) =>{
                 res.status(500).send({
-                    message: 'Error al obtener los libros'
+                    message: error.message
                 })
             }
         )
