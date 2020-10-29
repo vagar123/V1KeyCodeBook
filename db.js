@@ -5,7 +5,7 @@ const conectDB = () => {
 
     useUnifiedTopology:Escuchar los llmados que hacemos con mongoDB y monitorea que es lo que pasa. 
     */
-    mongoose.connect('mongodb+srv://VanessaGarnica:1000786552-53002807@vanessa.hyzkk.mongodb.net/KeyCodeBook?retryWrites=true&w=majority',{ useNewUrlParser:true, useUnifiedTopology:true}, (error) =>{
+    mongoose.connect('',{ useNewUrlParser:true, useUnifiedTopology:true}, (error) =>{
         if(error){
             console.log('Error: ', error)
         }else {
