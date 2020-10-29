@@ -1,11 +1,12 @@
 const mongoose = require('mongoose')
+const config = require('./config')
 
 const conectDB = () => {
     /* useNewUrlParser: analiza la informacion que se le quiere enviar a mongo. 
 
     useUnifiedTopology:Escuchar los llmados que hacemos con mongoDB y monitorea que es lo que pasa. 
     */
-    mongoose.connect('',{ useNewUrlParser:true, useUnifiedTopology:true}, (error) =>{
+    mongoose.connect(config.mongoDB,{ useNewUrlParser:true, useUnifiedTopology:true}, (error) =>{
         if(error){
             console.log('Error: ', error)
         }else {
