@@ -1,6 +1,7 @@
 const UserModel = require('../models/user')
 const service = require('../services/index')
 const nodemailer = require('nodemailer')
+const bcript = require('bcryptjs')
 
 /**
  * Método para almacenar un nuevo usuario
@@ -22,7 +23,8 @@ exports.create = (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password,
+        //password: req.body.password,
+        password: bcript.hashSync(req.body.password),
         role: req.body.role,
         birthDate: req.body.birthDate,
         age: req.body.age
@@ -128,7 +130,8 @@ exports.deleteOne = (req, res) => {
 exports.login = (req, res) => {
     UserModel.findOne({ email: req.body.email }, (error, dataUser) => {
         if (dataUser != null) {
-            if (dataUser.password == req.body.password) {
+            //if (dataUser.password == req.body.password) {
+            if (bcript.compareSync(req.body.password, dataUser.password)) {
                 res.send({ token: service.createToken(dataUser) })
             } else {
                 res.status(400).send({
