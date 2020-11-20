@@ -6,7 +6,7 @@ const conectDB = () => {
 
     useUnifiedTopology:Escuchar los llmados que hacemos con mongoDB y monitorea que es lo que pasa. 
     */
-    mongoose.connect(config.mongoDB,{ useNewUrlParser:true, useUnifiedTopology:true}, (error) =>{
+    mongoose.connect(config.mongoDB, {useNewUrlParser:true, useUnifiedTopology:true}, (error) =>{
         if(error){
             console.log('Error: ', error)
         }else {
